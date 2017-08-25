@@ -1,0 +1,18 @@
+#lang racket
+
+(define (is_attacked? x y L)
+  ;; checking for row and column
+  (define (check-row? x1 L1)
+    (ormap (lambda (i) (= x1 (first i))) L1))
+  (define (check-col?)
+    (ormap (lambda (i) (= y (second i))) L))
+
+  ;; checking for diagonals
+  (define (check-dig+?)
+    (ormap (lambda (i) (= (+ x (second i)) (+ y (first i)))) L))
+  (define (check-dig-?)
+    (ormap (lambda (i) (= (+ x (first i)) (+ y (second i)))) L))
+  (and (check-row?)
+       (check-col?)
+       (check-dig+?)
+       (check-dig-?)))
